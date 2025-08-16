@@ -1,0 +1,5 @@
+name: "AxHolograms"
+main: "com.artillexstudios.axholograms.AxHologramsPlugin"
+version: "${version}"
+api-version: "1.20"
+folia-supported: true
