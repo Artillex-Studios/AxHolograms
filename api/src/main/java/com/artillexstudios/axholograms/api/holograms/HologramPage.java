@@ -6,5 +6,5 @@ public interface HologramPage {
 
     HologramPageData getData();
 
-    HologramPage getBackingPage();
+    com.artillexstudios.axapi.hologram.page.HologramPage<?, ?> getBackingPage();
 }

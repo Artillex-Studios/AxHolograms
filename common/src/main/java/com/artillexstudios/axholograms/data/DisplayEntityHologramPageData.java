@@ -49,7 +49,7 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
     @Override
     public void setScale(Vector3f scale) {
         if (!Objects.equals(this.scale, scale)) {
-            this.changeListener.run();
+            this.getChangeListener().run();
         }
 
         this.scale = scale;
@@ -324,7 +324,7 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
     @Override
     public void deserialize(MapConfigurationGetter data) {
         MapConfigurationGetter translation = data.getConfigurationSection("translation");
-        if (translation != null) {
+        if (translation.wrapped() != null) {
             Float x = translation.getFloat("x");
             Float y = translation.getFloat("y");
             Float z = translation.getFloat("z");
@@ -336,7 +336,7 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
         }
 
         MapConfigurationGetter scale = data.getConfigurationSection("scale");
-        if (scale != null) {
+        if (scale.wrapped() != null) {
             Float x = scale.getFloat("x");
             Float y = scale.getFloat("y");
             Float z = scale.getFloat("z");
@@ -348,7 +348,7 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
         }
 
         MapConfigurationGetter rotationLeft = data.getConfigurationSection("rotation-left");
-        if (rotationLeft != null) {
+        if (rotationLeft.wrapped() != null) {
             Float x = rotationLeft.getFloat("x");
             Float y = rotationLeft.getFloat("y");
             Float z = rotationLeft.getFloat("z");
@@ -361,7 +361,7 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
         }
 
         MapConfigurationGetter rotationRight = data.getConfigurationSection("rotation-right");
-        if (rotationRight != null) {
+        if (rotationRight.wrapped() != null) {
             Float x = rotationRight.getFloat("x");
             Float y = rotationRight.getFloat("y");
             Float z = rotationRight.getFloat("z");
@@ -415,6 +415,6 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
     }
 
     protected Runnable getChangeListener() {
-        return this.changeListener;
+        return this.changeListener == null ? () -> {} : this.changeListener;
     }
 }

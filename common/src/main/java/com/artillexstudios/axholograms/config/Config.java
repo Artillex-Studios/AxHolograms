@@ -47,12 +47,6 @@ public class Config implements ConfigurationPart {
 
     private boolean refreshConfig() {
         Path path = FileUtils.PLUGIN_DIRECTORY.resolve("config.yml");
-        if (Files.exists(path)) {
-            if (!YamlUtils.suggest(path.toFile())) {
-                return false;
-            }
-        }
-
         if (this.config == null) {
             this.config = YamlConfiguration.of(path, Config.class)
                     .configVersion(1, "config-version")

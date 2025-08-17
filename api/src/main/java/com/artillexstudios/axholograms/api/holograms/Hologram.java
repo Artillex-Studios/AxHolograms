@@ -9,12 +9,14 @@ public interface Hologram {
 
     Location getLocation();
 
+    void setLocation(Location location);
+
     String getName();
 
     List<HologramPage> getPages();
 
     default void addPage(HologramPage page) {
-        this.addPage(this.getPages().size() - 1, page);
+        this.addPage(this.getPages().size(), page);
     }
 
     void addPage(int index, HologramPage page);
@@ -34,11 +36,14 @@ public interface Hologram {
      */
     void save();
 
+    boolean shouldSave();
+
     /**
      * Tell the Hologram, that it's world is loaded, and it can be created.
+     * @return A boolean, indicating if the Hologram was loaded.
      */
     @ApiStatus.Internal
-    void loadWithWorld();
+    boolean loadWithWorld();
 
     /**
      * Get the backing AxAPI hologram instance behind this hologram.

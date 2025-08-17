@@ -1,6 +1,7 @@
 package com.artillexstudios.axholograms.api;
 
 import com.artillexstudios.axholograms.api.holograms.Hologram;
+import com.artillexstudios.axholograms.api.holograms.HologramRegistry;
 import com.artillexstudios.axholograms.api.holograms.data.HologramPageData;
 import com.artillexstudios.axholograms.api.holograms.type.HologramType;
 import com.artillexstudios.axholograms.api.holograms.type.HologramTypes;
@@ -18,6 +19,8 @@ public interface AxHologramsAPI {
         this.getTypes().register(type);
         return type;
     }
+
+    HologramRegistry getRegistry();
 
     Hologram createHologram();
 

@@ -2,11 +2,14 @@ package com.artillexstudios.axholograms.data;
 
 import com.artillexstudios.axapi.config.YamlConfiguration;
 import com.artillexstudios.axapi.libs.snakeyaml.DumperOptions;
+import com.artillexstudios.axapi.utils.logging.LogUtils;
 import com.artillexstudios.axholograms.api.holograms.Hologram;
 import com.artillexstudios.axholograms.api.holograms.HologramPage;
 import com.artillexstudios.axholograms.api.serializer.LocationSerializer;
 import com.artillexstudios.axholograms.utils.FileUtils;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -36,5 +39,15 @@ public final class HologramSaver {
         }
 
         configuration.set("pages", pagesConfiguration);
+    }
+
+
+    public static void delete(Hologram hologram) {
+        Path configPath = FileUtils.HOLOGRAMS_DIRECTORY.resolve(hologram.getName() + ".yml");
+        try {
+            Files.delete(configPath);
+        } catch (IOException exception) {
+            LogUtils.error("Failed to delete file for hologram {}!", hologram.getName(), exception);
+        }
     }
 }
