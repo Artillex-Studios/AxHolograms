@@ -12,7 +12,7 @@ public class LocationSerializer implements Serializer<Location, String> {
 
     @Override
     public String serialize(Location object) {
-        return object.world().getName() + ";" + object.x() + ";" + object.y() + ";" + object.z() + ";" + object.yaw() + ";" + object.pitch();
+        return object.getWorld().getName() + ";" + object.getX() + ";" + object.getY() + ";" + object.getZ() + ";" + object.getYaw() + ";" + object.getPitch();
     }
 
     @Override

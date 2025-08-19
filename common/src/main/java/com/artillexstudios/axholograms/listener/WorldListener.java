@@ -12,7 +12,7 @@ public class WorldListener implements Listener {
     @EventHandler
     public void onWorldLoadEvent(WorldLoadEvent event) {
         for (Hologram savedHologram : AxHologramsAPI.getInstance().getRegistry().getSavedHolograms()) {
-            if (!savedHologram.getLocation().world().getName().equals(event.getWorld().getName())) {
+            if (!savedHologram.getLocation().getWorld().getName().equals(event.getWorld().getName())) {
                 continue;
             }
 
@@ -23,7 +23,7 @@ public class WorldListener implements Listener {
     @EventHandler
     public void onWorldUnloadEvent(WorldUnloadEvent event) {
         for (Hologram savedHologram : AxHologramsAPI.getInstance().getRegistry().getSavedHolograms()) {
-            if (!savedHologram.getLocation().world().getName().equals(event.getWorld().getName())) {
+            if (!savedHologram.getLocation().getWorld().getName().equals(event.getWorld().getName())) {
                 continue;
             }
 

@@ -2,7 +2,7 @@ group = rootProject.group
 version = rootProject.version
 
 dependencies {
-    implementation("com.artillexstudios.axapi:axapi:1.4.763:all")
+    implementation("com.artillexstudios.axapi:axapi:1.4.765:all")
 }
 
 tasks {

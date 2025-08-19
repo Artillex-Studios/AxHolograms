@@ -1,5 +1,6 @@
 package com.artillexstudios.axholograms.api;
 
+import com.artillexstudios.axapi.utils.Location;
 import com.artillexstudios.axholograms.AxHologramsPlugin;
 import com.artillexstudios.axholograms.api.holograms.Hologram;
 import com.artillexstudios.axholograms.api.holograms.HologramRegistry;
@@ -18,12 +19,12 @@ public final class AxHologramsAPIImpl implements AxHologramsAPI {
     }
 
     @Override
-    public Hologram createHologram() {
-        return null;
+    public Hologram createHologram(String name, Location location) {
+        return new com.artillexstudios.axholograms.hologram.Hologram(name, location, false);
     }
 
     @Override
-    public Hologram createSaveableHologram() {
-        return null;
+    public Hologram createSaveableHologram(String name, Location location) {
+        return new com.artillexstudios.axholograms.hologram.Hologram(name, location, true);
     }
 }

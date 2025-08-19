@@ -38,6 +38,10 @@ public interface Hologram {
 
     boolean shouldSave();
 
+    default boolean isLoaded() {
+        return this.getBackingHologram() != null;
+    }
+
     /**
      * Tell the Hologram, that it's world is loaded, and it can be created.
      * @return A boolean, indicating if the Hologram was loaded.

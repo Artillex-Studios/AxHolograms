@@ -1,5 +1,6 @@
 package com.artillexstudios.axholograms.api;
 
+import com.artillexstudios.axapi.utils.Location;
 import com.artillexstudios.axholograms.api.holograms.Hologram;
 import com.artillexstudios.axholograms.api.holograms.HologramRegistry;
 import com.artillexstudios.axholograms.api.holograms.data.HologramPageData;
@@ -22,9 +23,9 @@ public interface AxHologramsAPI {
 
     HologramRegistry getRegistry();
 
-    Hologram createHologram();
+    Hologram createHologram(String name, Location location);
 
-    Hologram createSaveableHologram();
+    Hologram createSaveableHologram(String name, Location location);
 
     static AxHologramsAPI getInstance() {
         return Holder.INSTANCE;

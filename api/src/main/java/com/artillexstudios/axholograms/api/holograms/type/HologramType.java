@@ -11,4 +11,6 @@ public interface HologramType<T extends HologramPageData> {
     HologramPage<?, ?> createHologramPage(Hologram hologram, T data);
 
     T createPageData();
+
+    T createDefaultPageData();
 }

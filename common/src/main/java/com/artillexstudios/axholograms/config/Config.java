@@ -22,6 +22,10 @@ public class Config implements ConfigurationPart {
 
     // TODO: smart-refresh, only send data if we need to
     @Comment("""
+            If we should add some default data to holograms, like content.
+            """)
+    public static boolean addDefaultData = false;
+    @Comment("""
             This setting controls how often holograms should be refreshed.
             This is in ticks, 1 tick is 50ms.
             """)

@@ -216,7 +216,7 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
 
         List<String> contentList = data.getStringList("content");
         if (contentList != null) {
-            this.setContent(String.join("\n", contentList));
+            this.setContent(String.join("\n<br>", contentList));
         }
 
         Integer lineWidth = data.getInteger("line-width");

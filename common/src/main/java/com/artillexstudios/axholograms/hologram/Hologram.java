@@ -59,6 +59,14 @@ public class Hologram implements com.artillexstudios.axholograms.api.holograms.H
     @Override
     public void addPage(int index, HologramPage page) {
         this.pages.add(index, page);
+        if (this.backingHologram != null) {
+            com.artillexstudios.axapi.hologram.page.HologramPage<?, ?> hologramPage = ((HologramType<HologramPageData>) page.getData().getType())
+                    .createHologramPage(this.backingHologram, page.getData());
+
+            ((com.artillexstudios.axholograms.hologram.HologramPage) page).setBackingPage(hologramPage);
+            this.backingHologram.addPage(hologramPage);
+            hologramPage.spawn();
+        }
     }
 
     @Override
@@ -104,7 +112,7 @@ public class Hologram implements com.artillexstudios.axholograms.api.holograms.H
 
     @Override
     public boolean loadWithWorld() {
-        if (this.backingHologram != null || this.location.world().toBukkit() == null) {
+        if (this.backingHologram != null || this.location.getWorld().toBukkit() == null) {
             return false;
         }
 

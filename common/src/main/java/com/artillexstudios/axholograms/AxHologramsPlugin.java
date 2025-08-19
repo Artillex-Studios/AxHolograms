@@ -1,11 +1,13 @@
 package com.artillexstudios.axholograms;
 
 import com.artillexstudios.axapi.AxPlugin;
+import com.artillexstudios.axapi.dependencies.DependencyManagerWrapper;
 import com.artillexstudios.axapi.utils.featureflags.FeatureFlags;
-import com.artillexstudios.axapi.utils.logging.LogUtils;
 import com.artillexstudios.axholograms.api.AxHologramsAPI;
 import com.artillexstudios.axholograms.api.holograms.Hologram;
+import com.artillexstudios.axholograms.command.AxHologramsCommand;
 import com.artillexstudios.axholograms.config.Config;
+import com.artillexstudios.axholograms.config.Language;
 import com.artillexstudios.axholograms.data.HologramLoader;
 import com.artillexstudios.axholograms.hologram.HologramRegistry;
 import com.artillexstudios.axholograms.listener.WorldListener;
@@ -27,8 +29,16 @@ public final class AxHologramsPlugin extends AxPlugin {
     }
 
     @Override
+    public void dependencies(DependencyManagerWrapper manager) {
+        manager.dependency("dev{}jorel:commandapi-bukkit-shade:10.1.2", true);
+        manager.relocate("dev{}jorel{}commandapi", "com.artillexstudios.axholograms.libs.commandapi");
+    }
+
+    @Override
     public void load() {
+        Language.reload();
         AxHologramsAPI.getInstance().registerHologramType(new TextHologramType());
+        AxHologramsCommand.onLoad(this);
     }
 
     @Override
@@ -39,11 +49,13 @@ public final class AxHologramsPlugin extends AxPlugin {
             savedHologram.loadWithWorld();
         }
         Bukkit.getPluginManager().registerEvents(new WorldListener(), this);
+        AxHologramsCommand.register();
+        AxHologramsCommand.onEnable();
     }
 
     @Override
     public void disable() {
-        super.disable();
+        AxHologramsCommand.onDisable();
     }
 
     public static AxHologramsPlugin getInstance() {
