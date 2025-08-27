@@ -83,7 +83,7 @@ public class AxHologramsCommand {
                                 })
                         )
                 )
-                .then(new MultiLiteralArgument("move","teleporthere", "tphere")
+                .then(new MultiLiteralArgument("move", "teleporthere", "tphere")
                         .withPermission("axholograms.command.move")
                         .then(ArgumentTypes.hologram("hologram")
                                 .executesPlayer((sender, args) -> {
@@ -93,12 +93,16 @@ public class AxHologramsCommand {
                                 })
                         )
                 )
+                .then(new LiteralArgument("edit")
+                        .withPermission("axholograms.command.edit")
+                        .then(ArgumentTypes.hologram("hologram"))
+                )
                 .then(new LiteralArgument("center")
                         .withPermission("axholograms.command.center")
                         .then(ArgumentTypes.hologram("hologram")
                                 .executesPlayer((sender, args) -> {
                                     Hologram hologram = args.getByClass("hologram", Hologram.class);
-                                    hologram.setLocation(Location.create(sender.getLocation()).toCenter());
+                                    hologram.setLocation(hologram.getLocation().copy().toCenter());
                                     MessageUtils.sendMessage(sender, Language.prefix, Language.successfullyCenteredHologram, Placeholder.unparsed("name", hologram.getName()));
                                 })
                         )

@@ -39,6 +39,7 @@ public final class HologramSaver {
         }
 
         configuration.set("pages", pagesConfiguration);
+        configuration.save();
     }
 
 
