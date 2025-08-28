@@ -9,10 +9,14 @@ import com.artillexstudios.axholograms.api.holograms.Hologram;
 import com.artillexstudios.axholograms.api.holograms.type.HologramType;
 import com.artillexstudios.axholograms.command.argument.ArgumentTypes;
 import com.artillexstudios.axholograms.config.Language;
+import com.artillexstudios.axholograms.data.TextHologramPageData;
 import com.artillexstudios.axholograms.hologram.HologramPage;
+import com.artillexstudios.axholograms.type.TextHologramType;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
 import dev.jorel.commandapi.CommandTree;
+import dev.jorel.commandapi.arguments.GreedyStringArgument;
+import dev.jorel.commandapi.arguments.IntegerArgument;
 import dev.jorel.commandapi.arguments.LiteralArgument;
 import dev.jorel.commandapi.arguments.MultiLiteralArgument;
 import dev.jorel.commandapi.arguments.StringArgument;
@@ -95,7 +99,80 @@ public class AxHologramsCommand {
                 )
                 .then(new LiteralArgument("edit")
                         .withPermission("axholograms.command.edit")
-                        .then(ArgumentTypes.hologram("hologram"))
+                        .then(ArgumentTypes.hologram("hologram")
+                                .then(new LiteralArgument("line")
+                                        .then(new LiteralArgument("add")
+                                                .then(new IntegerArgument("page", 1)
+                                                        .then(new GreedyStringArgument("content")
+                                                                .executes((sender, args) -> {
+                                                                    Hologram hologram = args.getByClass("hologram", Hologram.class);
+                                                                    int pageNum = args.getByClass("page", Integer.class) - 1;
+                                                                    if (pageNum > hologram.getPages().size() - 1) {
+                                                                        sender.sendMessage("Index out of bounds!");
+                                                                        return;
+                                                                    }
+
+                                                                    var page = hologram.getPages().get(pageNum);
+                                                                    if (!(page.getData() instanceof TextHologramPageData data)) {
+                                                                        return;
+                                                                    }
+                                                                    String contentArgument = args.getByClass("content", String.class);
+
+                                                                    String content = data.getContent() + "\n<br>" + contentArgument;
+                                                                    data.setContent(content);
+                                                                })
+                                                        )
+                                                )
+                                                .then(new GreedyStringArgument("content")
+                                                        .executes((sender, args) -> {
+                                                            Hologram hologram = args.getByClass("hologram", Hologram.class);
+                                                            var page = hologram.getPages().getFirst();
+                                                            if (!(page.getData() instanceof TextHologramPageData data)) {
+                                                                return;
+                                                            }
+                                                            String contentArgument = args.getByClass("content", String.class);
+
+                                                            String content = data.getContent() + "\n<br>" + contentArgument;
+                                                            data.setContent(content);
+                                                        })
+                                                )
+                                        )
+                                        .then(new LiteralArgument("remove")
+                                                .then(new IntegerArgument("line")
+                                                        .executes((sender, args) -> {
+
+                                                        })
+                                                )
+                                        )
+                                        .then(new LiteralArgument("set")
+                                                .then(new IntegerArgument("line")
+                                                        .then(new GreedyStringArgument("content")
+                                                                .executes((sender, args) -> {
+
+                                                                })
+                                                        )
+                                                )
+                                        )
+                                        .then(new LiteralArgument("insert")
+                                                .then(new LiteralArgument("before")
+                                                        .then(new IntegerArgument("line")
+                                                                .then(new GreedyStringArgument("content")
+
+                                                                )
+                                                        )
+
+                                                )
+                                                .then(new LiteralArgument("after")
+
+                                                )
+                                                .then(new IntegerArgument("line")
+                                                        .executes((sender, args) -> {
+
+                                                        })
+                                                )
+                                        )
+                                )
+                        )
                 )
                 .then(new LiteralArgument("center")
                         .withPermission("axholograms.command.center")

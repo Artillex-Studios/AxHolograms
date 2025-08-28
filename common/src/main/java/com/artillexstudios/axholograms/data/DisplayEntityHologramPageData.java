@@ -34,11 +34,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setTranslation(Vector3f translation) {
-        if (!Objects.equals(this.translation, translation)) {
+        boolean changed = !Objects.equals(this.translation, translation);
+        this.translation = translation;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.translation = translation;
     }
 
     @Override
@@ -48,11 +49,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setScale(Vector3f scale) {
-        if (!Objects.equals(this.scale, scale)) {
+        boolean changed = !Objects.equals(this.scale, scale);
+        this.scale = scale;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.scale = scale;
     }
 
     @Override
@@ -62,11 +64,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setRotationLeft(Quaternion rotationLeft) {
-        if (!Objects.equals(this.rotationLeft, rotationLeft)) {
+        boolean changed = !Objects.equals(this.rotationLeft, rotationLeft);
+        this.rotationLeft = rotationLeft;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.rotationLeft = rotationLeft;
     }
 
     @Override
@@ -76,11 +79,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setRotationRight(Quaternion rotationRight) {
-        if (!Objects.equals(this.rotationRight, rotationRight)) {
+        boolean changed = !Objects.equals(this.rotationRight, rotationRight);
+        this.rotationRight = rotationRight;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.rotationRight = rotationRight;
     }
 
     @Override
@@ -90,11 +94,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setBillboardConstrain(DisplayMeta.BillboardConstrain billboardConstrain) {
-        if (!Objects.equals(this.billboardConstrain, billboardConstrain)) {
+        boolean changed = !Objects.equals(this.billboardConstrain, billboardConstrain);
+        this.billboardConstrain = billboardConstrain;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.billboardConstrain = billboardConstrain;
     }
 
     @Override
@@ -104,11 +109,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setBrightnessOverride(int brightnessOverride) {
-        if (!Objects.equals(this.brightnessOverride, brightnessOverride)) {
+        boolean changed = !Objects.equals(this.brightnessOverride, brightnessOverride);
+        this.brightnessOverride = brightnessOverride;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.brightnessOverride = brightnessOverride;
     }
 
     @Override
@@ -118,11 +124,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setViewRange(float viewRange) {
-        if (!Objects.equals(this.viewRange, viewRange)) {
+        boolean changed = !Objects.equals(this.viewRange, viewRange);
+        this.viewRange = viewRange;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.viewRange = viewRange;
     }
 
     @Override
@@ -132,11 +139,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setShadowRadius(float shadowRadius) {
-        if (!Objects.equals(this.shadowRadius, shadowRadius)) {
+        boolean changed = !Objects.equals(this.shadowRadius, shadowRadius);
+        this.shadowRadius = shadowRadius;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.shadowRadius = shadowRadius;
     }
 
     @Override
@@ -146,11 +154,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setShadowStrength(float shadowStrength) {
-        if (!Objects.equals(this.shadowStrength, shadowStrength)) {
+        boolean changed = !Objects.equals(this.shadowStrength, shadowStrength);
+        this.shadowStrength = shadowStrength;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.shadowStrength = shadowStrength;
     }
 
     @Override
@@ -160,11 +169,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setWidth(float width) {
-        if (!Objects.equals(this.width, width)) {
+        boolean changed = !Objects.equals(this.width, width);
+        this.width = width;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.width = width;
     }
 
     @Override
@@ -174,11 +184,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setHeight(float height) {
-        if (!Objects.equals(this.height, height)) {
+        boolean changed = !Objects.equals(this.height, height);
+        this.height = height;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.height = height;
     }
 
     @Override
@@ -188,11 +199,12 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
 
     @Override
     public void setGlowColorOverride(int glowColorOverride) {
-        if (!Objects.equals(this.glowColorOverride, glowColorOverride)) {
+        boolean changed = !Objects.equals(this.glowColorOverride, glowColorOverride);
+        this.glowColorOverride = glowColorOverride;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.glowColorOverride = glowColorOverride;
     }
 
     @Override

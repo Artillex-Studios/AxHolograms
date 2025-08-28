@@ -28,11 +28,12 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
 
     @Override
     public void setContent(String content) {
-        if (!Objects.equals(this.content, content)) {
+        boolean changed = !Objects.equals(this.content, content);
+        this.content = content;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.content = content;
     }
 
     @Override
@@ -42,11 +43,12 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
 
     @Override
     public void setLineWidth(int lineWidth) {
-        if (!Objects.equals(this.lineWidth, lineWidth)) {
+        boolean changed = !Objects.equals(this.lineWidth, lineWidth);
+        this.lineWidth = lineWidth;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.lineWidth = lineWidth;
     }
 
     @Override
@@ -56,11 +58,12 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
 
     @Override
     public void setBackgroundColor(int backgroundColor) {
-        if (!Objects.equals(this.backgroundColor, backgroundColor)) {
+        boolean changed = !Objects.equals(this.backgroundColor, backgroundColor);
+        this.backgroundColor = backgroundColor;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.backgroundColor = backgroundColor;
     }
 
     @Override
@@ -70,11 +73,12 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
 
     @Override
     public void setTextOpacity(byte textOpacity) {
-        if (!Objects.equals(this.textOpacity, textOpacity)) {
+        boolean changed = !Objects.equals(this.textOpacity, textOpacity);
+        this.textOpacity = textOpacity;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.textOpacity = textOpacity;
     }
 
     @Override
@@ -84,11 +88,12 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
 
     @Override
     public void setAlignment(TextDisplayMeta.Alignment alignment) {
-        if (!Objects.equals(this.alignment, alignment)) {
+        boolean changed = !Objects.equals(this.alignment, alignment);
+        this.alignment = alignment;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.alignment = alignment;
     }
 
     @Override
@@ -98,11 +103,12 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
 
     @Override
     public void setHasShadow(boolean hasShadow) {
-        if (!Objects.equals(this.hasShadow, hasShadow)) {
+        boolean changed = !Objects.equals(this.hasShadow, hasShadow);
+        this.hasShadow = hasShadow;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.hasShadow = hasShadow;
     }
 
     @Override
@@ -112,11 +118,12 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
 
     @Override
     public void setSeeThrough(boolean isSeeThrough) {
-        if (!Objects.equals(this.isSeeThrough, isSeeThrough)) {
+        boolean changed = !Objects.equals(this.isSeeThrough, isSeeThrough);
+        this.isSeeThrough = isSeeThrough;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.isSeeThrough = isSeeThrough;
     }
 
     @Override
@@ -126,11 +133,12 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
 
     @Override
     public void setHasDefaultBackground(boolean hasDefaultBackground) {
-        if (!Objects.equals(this.hasDefaultBackground, hasDefaultBackground)) {
+        boolean changed = !Objects.equals(this.hasDefaultBackground, hasDefaultBackground);
+        this.hasDefaultBackground = hasDefaultBackground;
+
+        if (changed) {
             this.getChangeListener().run();
         }
-
-        this.hasDefaultBackground = hasDefaultBackground;
     }
 
     @Override
