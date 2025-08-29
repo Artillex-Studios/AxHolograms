@@ -9,6 +9,7 @@ import com.artillexstudios.axholograms.AxHologramsPlugin;
 import com.artillexstudios.axholograms.api.AxHologramsAPI;
 import com.artillexstudios.axholograms.api.holograms.Hologram;
 import com.artillexstudios.axholograms.api.holograms.type.HologramType;
+import com.artillexstudios.axholograms.api.holograms.type.HologramTypes;
 import com.artillexstudios.axholograms.command.argument.ArgumentTypes;
 import com.artillexstudios.axholograms.config.Language;
 import com.artillexstudios.axholograms.data.DisplayEntityHologramPageData;
@@ -186,16 +187,12 @@ public class AxHologramsCommand {
                                                         .then(new FloatArgument("z")
                                                                 .executes((sender, args) -> {
                                                                     Hologram hologram = args.getByClass("hologram", Hologram.class);
-                                                                    for (com.artillexstudios.axholograms.api.holograms.HologramPage page : hologram.getPages()) {
-                                                                        if (!(page.getData() instanceof DisplayEntityHologramPageData data)) {
-                                                                            return;
-                                                                        }
-                                                                        float x = args.getByClass("x", Float.class);
-                                                                        float y = args.getByClass("y", Float.class);
-                                                                        float z = args.getByClass("z", Float.class);
+                                                                    DisplayEntityHologramPageData data = (DisplayEntityHologramPageData) hologram.getCommonData(HologramTypes.TEXT.get());
+                                                                    float x = args.getByClass("x", Float.class);
+                                                                    float y = args.getByClass("y", Float.class);
+                                                                    float z = args.getByClass("z", Float.class);
 
-                                                                        data.setTranslation(new Vector3f(x, y, z));
-                                                                    }
+                                                                    data.setTranslation(new Vector3f(x, y, z));
                                                                     hologram.save();
                                                                 })
                                                         )
@@ -208,16 +205,12 @@ public class AxHologramsCommand {
                                                         .then(new FloatArgument("z")
                                                                 .executes((sender, args) -> {
                                                                     Hologram hologram = args.getByClass("hologram", Hologram.class);
-                                                                    for (com.artillexstudios.axholograms.api.holograms.HologramPage page : hologram.getPages()) {
-                                                                        if (!(page.getData() instanceof DisplayEntityHologramPageData data)) {
-                                                                            return;
-                                                                        }
-                                                                        float x = args.getByClass("x", Float.class);
-                                                                        float y = args.getByClass("y", Float.class);
-                                                                        float z = args.getByClass("z", Float.class);
+                                                                    DisplayEntityHologramPageData data = (DisplayEntityHologramPageData) hologram.getCommonData(HologramTypes.TEXT.get());
+                                                                    float x = args.getByClass("x", Float.class);
+                                                                    float y = args.getByClass("y", Float.class);
+                                                                    float z = args.getByClass("z", Float.class);
 
-                                                                        data.setScale(new Vector3f(x, y, z));
-                                                                    }
+                                                                    data.setScale(new Vector3f(x, y, z));
                                                                     hologram.save();
                                                                 })
                                                         )
@@ -230,19 +223,14 @@ public class AxHologramsCommand {
                                                         .toList()
                                                         .toArray(new String[0])
                                                 )
-                                                .executes((sender, args) -> {
-                                                    Hologram hologram = args.getByClass("hologram", Hologram.class);
-                                                    String constrainName = args.getByClass("constrain", String.class);
-                                                    DisplayMeta.BillboardConstrain constrain = DisplayMeta.BillboardConstrain.valueOf(constrainName.toUpperCase(Locale.ENGLISH));
-                                                    for (com.artillexstudios.axholograms.api.holograms.HologramPage page : hologram.getPages()) {
-                                                        if (!(page.getData() instanceof DisplayEntityHologramPageData data)) {
-                                                            return;
-                                                        }
-
-                                                        data.setBillboardConstrain(constrain);
-                                                    }
-                                                    hologram.save();
-                                                })
+                                                        .executes((sender, args) -> {
+                                                            Hologram hologram = args.getByClass("hologram", Hologram.class);
+                                                            String constrainName = args.getByClass("constrain", String.class);
+                                                            DisplayMeta.BillboardConstrain constrain = DisplayMeta.BillboardConstrain.valueOf(constrainName.toUpperCase(Locale.ENGLISH));
+                                                            DisplayEntityHologramPageData data = (DisplayEntityHologramPageData) hologram.getCommonData(HologramTypes.TEXT.get());
+                                                            data.setBillboardConstrain(constrain);
+                                                            hologram.save();
+                                                        })
                                         )
                                 )
                         )

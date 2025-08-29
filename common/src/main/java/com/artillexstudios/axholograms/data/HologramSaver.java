@@ -3,8 +3,11 @@ package com.artillexstudios.axholograms.data;
 import com.artillexstudios.axapi.config.YamlConfiguration;
 import com.artillexstudios.axapi.libs.snakeyaml.DumperOptions;
 import com.artillexstudios.axapi.utils.logging.LogUtils;
+import com.artillexstudios.axholograms.api.AxHologramsAPI;
 import com.artillexstudios.axholograms.api.holograms.Hologram;
 import com.artillexstudios.axholograms.api.holograms.HologramPage;
+import com.artillexstudios.axholograms.api.holograms.data.HologramPageData;
+import com.artillexstudios.axholograms.api.holograms.type.HologramType;
 import com.artillexstudios.axholograms.api.serializer.LocationSerializer;
 import com.artillexstudios.axholograms.utils.FileUtils;
 
@@ -31,6 +34,12 @@ public final class HologramSaver {
         configuration.set("location", LocationSerializer.INSTANCE.serialize(hologram.getLocation()));
         List<Map<String, Object>> pagesConfiguration = new ArrayList<>();
 
+        Map<String, Object> commonConfiguration = new LinkedHashMap<>();
+        for (HologramType<?> type : AxHologramsAPI.getInstance().getTypes().registered()) {
+            HologramPageData commonData = hologram.getCommonData(type);
+            commonData.serialize(commonConfiguration);
+        }
+
         for (HologramPage page : hologram.getPages()) {
             Map<String, Object> pageConfiguration = new LinkedHashMap<>();
             pageConfiguration.put("type", page.getData().getType().getName());
@@ -39,6 +48,7 @@ public final class HologramSaver {
         }
 
         configuration.set("pages", pagesConfiguration);
+        configuration.set("common", commonConfiguration);
         configuration.save();
     }
 

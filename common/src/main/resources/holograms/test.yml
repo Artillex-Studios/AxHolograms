@@ -1,4 +1,6 @@
 location: ""
+common:
+  -
 pages:
   - type: "text"
   - type: "text"

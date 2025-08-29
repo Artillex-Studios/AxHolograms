@@ -1,5 +1,6 @@
 package com.artillexstudios.axholograms.hologram;
 
+import com.artillexstudios.axapi.config.adapters.MapConfigurationGetter;
 import com.artillexstudios.axapi.utils.Location;
 import com.artillexstudios.axapi.utils.logging.LogUtils;
 import com.artillexstudios.axholograms.api.AxHologramsAPI;
@@ -12,9 +13,13 @@ import com.google.common.base.Preconditions;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Hologram implements com.artillexstudios.axholograms.api.holograms.Hologram {
+    private final Map<HologramType<?>, HologramPageData> commonData = new HashMap<>();
     private final List<HologramPage> pages = new ArrayList<>();
     private final String name;
     private final boolean shouldSave;
@@ -54,6 +59,24 @@ public class Hologram implements com.artillexstudios.axholograms.api.holograms.H
     @Override
     public List<HologramPage> getPages() {
         return Collections.unmodifiableList(this.pages);
+    }
+
+    @Override
+    public HologramPageData getCommonData(HologramType<?> type) {
+        HologramPageData data = this.commonData.computeIfAbsent(type, HologramType::createPageData);
+        data.setChangeListener(() -> {
+            Map<String, Object> serialized = new LinkedHashMap<>();
+            data.serialize(serialized);
+            MapConfigurationGetter getter = new MapConfigurationGetter(serialized);
+            for (HologramPageData value : this.commonData.values()) {
+                value.deserialize(getter);
+            }
+
+            for (HologramPage page : this.pages) {
+                page.getData().deserialize(getter);
+            }
+        });
+        return data;
     }
 
     @Override

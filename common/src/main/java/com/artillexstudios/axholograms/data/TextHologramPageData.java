@@ -228,37 +228,37 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
         }
 
         Integer lineWidth = data.getInteger("line-width");
-        if (lineWidth != null) {
+        if (lineWidth != null && this.lineWidth == null) {
             this.setLineWidth(lineWidth);
         }
 
         Integer backgroundColor = data.getInteger("background-color");
-        if (backgroundColor != null) {
+        if (backgroundColor != null && this.backgroundColor == null) {
             this.setBackgroundColor(backgroundColor);
         }
 
         Byte textOpacity = data.getByte("text-opacity");
-        if (textOpacity != null) {
+        if (textOpacity != null && this.textOpacity == null) {
             this.setTextOpacity(textOpacity);
         }
 
         TextDisplayMeta.Alignment alignment = data.getEnum("alignment", TextDisplayMeta.Alignment.class);
-        if (alignment != null) {
+        if (alignment != null && this.alignment == null) {
             this.setAlignment(alignment);
         }
 
         Boolean shadow = data.getBoolean("shadow");
-        if (shadow != null) {
+        if (shadow != null && this.hasShadow == null) {
             this.setHasShadow(shadow);
         }
 
         Boolean seeThrough = data.getBoolean("see-through");
-        if (seeThrough != null) {
+        if (seeThrough != null && this.isSeeThrough == null) {
             this.setSeeThrough(seeThrough);
         }
 
         Boolean hasDefaultBackground = data.getBoolean("default-background");
-        if (hasDefaultBackground != null) {
+        if (hasDefaultBackground != null && this.hasDefaultBackground == null) {
             this.setHasDefaultBackground(hasDefaultBackground);
         }
     }

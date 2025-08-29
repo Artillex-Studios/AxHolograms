@@ -17,4 +17,6 @@ public interface HologramPageData {
     void apply(HologramPage<?, ?> page);
 
     void setChangeListener(Runnable changed);
+
+    Runnable getChangeListener();
 }

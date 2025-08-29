@@ -336,7 +336,7 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
     @Override
     public void deserialize(MapConfigurationGetter data) {
         MapConfigurationGetter translation = data.getConfigurationSection("translation");
-        if (translation.wrapped() != null) {
+        if (translation.wrapped() != null && this.translation == null) {
             Float x = translation.getFloat("x");
             Float y = translation.getFloat("y");
             Float z = translation.getFloat("z");
@@ -348,7 +348,7 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
         }
 
         MapConfigurationGetter scale = data.getConfigurationSection("scale");
-        if (scale.wrapped() != null) {
+        if (scale.wrapped() != null && this.scale == null) {
             Float x = scale.getFloat("x");
             Float y = scale.getFloat("y");
             Float z = scale.getFloat("z");
@@ -360,7 +360,7 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
         }
 
         MapConfigurationGetter rotationLeft = data.getConfigurationSection("rotation-left");
-        if (rotationLeft.wrapped() != null) {
+        if (rotationLeft.wrapped() != null && this.rotationLeft == null) {
             Float x = rotationLeft.getFloat("x");
             Float y = rotationLeft.getFloat("y");
             Float z = rotationLeft.getFloat("z");
@@ -373,7 +373,7 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
         }
 
         MapConfigurationGetter rotationRight = data.getConfigurationSection("rotation-right");
-        if (rotationRight.wrapped() != null) {
+        if (rotationRight.wrapped() != null && this.rotationRight == null) {
             Float x = rotationRight.getFloat("x");
             Float y = rotationRight.getFloat("y");
             Float z = rotationRight.getFloat("z");
@@ -386,37 +386,37 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
         }
 
         DisplayMeta.BillboardConstrain billboardConstrain = data.getEnum("billboard-constrain", DisplayMeta.BillboardConstrain.class);
-        if (billboardConstrain != null) {
+        if (billboardConstrain != null && this.billboardConstrain == null) {
             this.setBillboardConstrain(billboardConstrain);
         }
 
         Integer brightnessOverride = data.getInteger("brightness-override");
-        if (brightnessOverride != null) {
+        if (brightnessOverride != null && this.brightnessOverride == null) {
             this.setBrightnessOverride(brightnessOverride);
         }
 
         Float viewRange = data.getFloat("view-range");
-        if (viewRange != null) {
+        if (viewRange != null && this.viewRange == null) {
             this.setViewRange(viewRange);
         }
 
         Float shadowRadius = data.getFloat("shadow-radius");
-        if (shadowRadius != null) {
+        if (shadowRadius != null && this.shadowRadius == null) {
             this.setShadowRadius(shadowRadius);
         }
 
         Float shadowStrength = data.getFloat("shadow-strength");
-        if (shadowStrength != null) {
+        if (shadowStrength != null && this.shadowStrength == null) {
             this.setShadowStrength(shadowStrength);
         }
 
         Float width = data.getFloat("width");
-        if (width != null) {
+        if (width != null && this.width == null) {
             this.setWidth(width);
         }
 
         Float height = data.getFloat("height");
-        if (height != null) {
+        if (height != null && this.height == null) {
             this.setHeight(height);
         }
 
@@ -426,7 +426,8 @@ public abstract class DisplayEntityHologramPageData implements DisplayHologramPa
         }
     }
 
-    protected Runnable getChangeListener() {
+    @Override
+    public Runnable getChangeListener() {
         return this.changeListener == null ? () -> {} : this.changeListener;
     }
 }

@@ -48,6 +48,14 @@ public class HologramLoader {
             String name = FilenameUtils.getBaseName(file.getName());
             Location location = LocationSerializer.INSTANCE.deserialize(configuration.getString("location"));
             Hologram hologram = new Hologram(name, location, true);
+            MapConfigurationGetter common = configuration.getConfigurationSection("common");
+            if (common.wrapped() != null) {
+                for (HologramType<?> type : AxHologramsAPI.getInstance().getTypes().registered()) {
+                    HologramPageData commonData = hologram.getCommonData(type);
+                    commonData.deserialize(common);
+                }
+            }
+
             List<MapConfigurationGetter> getters = configuration.getList("pages", object -> {
                 if (Config.debug) {
                     LogUtils.debug("Page: {}, class: {}", object, object.getClass());
@@ -76,6 +84,12 @@ public class HologramLoader {
                 HologramPage page = new HologramPage(pageData);
                 hologram.addPage(page);
             }
+
+            for (HologramType<?> type : AxHologramsAPI.getInstance().getTypes().registered()) {
+                HologramPageData commonData = hologram.getCommonData(type);
+                commonData.getChangeListener().run();
+            }
+
             AxHologramsAPI.getInstance().getRegistry().register(hologram);
         }
     }

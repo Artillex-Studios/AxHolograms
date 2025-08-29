@@ -1,6 +1,8 @@
 package com.artillexstudios.axholograms.api.holograms;
 
 import com.artillexstudios.axapi.utils.Location;
+import com.artillexstudios.axholograms.api.holograms.data.HologramPageData;
+import com.artillexstudios.axholograms.api.holograms.type.HologramType;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.List;
@@ -14,6 +16,8 @@ public interface Hologram {
     String getName();
 
     List<HologramPage> getPages();
+
+    HologramPageData getCommonData(HologramType<?> type);
 
     default void addPage(HologramPage page) {
         this.addPage(this.getPages().size(), page);
