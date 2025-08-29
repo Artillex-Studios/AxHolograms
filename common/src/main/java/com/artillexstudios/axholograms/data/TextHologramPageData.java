@@ -186,7 +186,7 @@ public class TextHologramPageData extends DisplayEntityHologramPageData implemen
         super.serialize(map);
 
         if (this.content != null) {
-            map.put("content", List.of(this.content.split("\n")));
+            map.put("content", List.of(this.content.replace("<br>", "").split("\n")));
         }
 
         if (this.lineWidth != null) {
